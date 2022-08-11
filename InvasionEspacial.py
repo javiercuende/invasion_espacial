@@ -20,7 +20,7 @@ class Personaje:
 
 class Cohete(Personaje):
 
-    _IMG_COHETE : str                = "cohete.png"
+    _IMG_COHETE : str                = "assets/cohete.png"
 
     def __init__(self, pos_x: float = 366., pos_y: float=500.) -> None:
         super().__init__(pos_x, pos_y)
@@ -43,7 +43,7 @@ class Cohete(Personaje):
 
 class Enemigo(Personaje):
 
-    _IMG_ENEMIGO : str                = "enemigo.png"
+    _IMG_ENEMIGO : str                = "assets/enemigo.png"
     _DESPLAZAMIENTO: float            = 3
     _SALTO_VERTICAL: float            = 50
 
@@ -83,12 +83,12 @@ class AccionJuego:
         self.enemigos_abatidos  : int  = 0
 
     def disparo(self) -> None:
-        sonido_bala = mixer.Sound('disparo.mp3')
+        sonido_bala = mixer.Sound('assets/disparo.mp3')
         sonido_bala.play()
         self.posiciones_balas.append((self.cohete.pos_x+16, self.cohete.pos_y-50))
 
     def show_balas(self, pantalla) -> None:
-        _IMAGE_BALA = pygame.image.load('bala.png')
+        _IMAGE_BALA = pygame.image.load('assets/bala.png')
         nuevas_pos_balas = []
         for pos_x, pos_y in self.posiciones_balas:
             pantalla.blit(_IMAGE_BALA, (pos_x, pos_y) )
@@ -100,7 +100,7 @@ class AccionJuego:
             for _item_bala in self.posiciones_balas:
                 if _item_bala[0] > (_enemigo.pos_x -30)  and _item_bala[0] < (_enemigo.pos_x +30) \
                     and _item_bala[1] > (_enemigo.pos_y - 30) and _item_bala[1] < (_enemigo.pos_y +30):
-                    sonido_golpe = mixer.Sound('Golpe.mp3')
+                    sonido_golpe = mixer.Sound('assets/Golpe.mp3')
                     sonido_golpe.play()
                     self.enemigos.remove(_enemigo)
                     self.posiciones_balas.remove(_item_bala)
@@ -120,7 +120,7 @@ class PantallaJuego:
 
     _NUM_ENEMIGOS           = 8
     _TITULO                 = "Invasión Espacial"
-    _ICONO_GAME             = "ovni.png"
+    _ICONO_GAME             = "assets/ovni.png"
     #RGB
     _BACKGROUND_COLOR       = (205,144,228)
     _LONGITUD_DESPLAZA_COHETE: float = 20.0
@@ -136,7 +136,7 @@ class PantallaJuego:
         self.__carga_musica_fondo()
 
     def __carga_musica_fondo(self):
-        mixer.music.load('MusicaFondo.mp3')
+        mixer.music.load('assets/MusicaFondo.mp3')
         mixer.music.play(-1)
 
     def __cargar_enemigos(self) -> None:
@@ -182,7 +182,7 @@ class PantallaJuego:
         while esta_ejecutandose:
             esta_ejecutandose = self.__handler_events()
             self.pantalla.fill(PantallaJuego._BACKGROUND_COLOR)
-            _FONDO = pygame.image.load('Fondo.jpg')
+            _FONDO = pygame.image.load('assets/Fondo.jpg')
             self.pantalla_main.blit(_FONDO,(0,0))
             # Mostramos el puntuaje
             if not fin_juego:
